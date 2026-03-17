@@ -1,0 +1,70 @@
+﻿
+<div class= "page-header" >
+    <ul class="breadcrumbs mb-3">
+        <li class="nav-home">
+            <a asp-controller="Admin" asp-action="Dashboard">
+                <i class="icon-home"></i>
+            </a>
+        </li>
+        <li class="separator">
+            <i class="icon-arrow-right"></i>
+        </li>
+        <li class="nav-item">
+            <a asp-action="ListingList">User List</a>
+        </li>
+    </ul>
+</div>
+
+<div class="col-md-12">
+    <div class="card">
+        <div class="card-header">
+            <div class="d-flex align-items-center">
+                <h4 class="card-title">User List</h4>
+                <a asp-controller="Admin"
+                   asp-action="AddUser"
+                   class="btn btn-sm btn-outline-primary btn-round ms-auto">
+                    <i class="fa fa-plus"></i>
+                    Add New User
+                </a>
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table id="multi-filter-select" class="display table table-striped table-hover">
+                    <thead class="text-center ">
+                        <tr>
+                            <th>Sr. No.</th>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Role</th>
+                            <th>Phone Number</th>
+                            <th>Created At</th>
+                        </tr>
+                    </thead>
+                    
+                    <tbody class="text-center">
+                        @if (Model != null && Model.Count > 0)
+                        {
+                            int i = 1;
+                            foreach (var user in Model)
+                            {
+                                <tr>
+                                    <td>@i</td>
+                                    <td>@user.Name</td>
+                                    <td>@user.Email</td>
+                                    <td>@user.Role</td>
+                                    <td>@user.Phone</td>
+                                    <td>@user.CreatedAt.ToString("dd-MM-yyyy")</td>
+                                </tr>
+                                i++;
+                            }
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="~/assets/js/core/jquery-3.7.1.min.js"></script>
+<script src="~/assets/js/core/popper.min.js"></script>

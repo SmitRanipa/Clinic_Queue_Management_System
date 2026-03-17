@@ -1,0 +1,24 @@
+﻿@{
+    var role = Context.Session.GetString("Role");
+
+    if (role == "admin")
+    {
+        Layout = "~/Views/Shared/_Layout.cshtml";
+    }
+    else if (role == "doctor")
+    {
+        Layout = "~/Views/Shared/_DoctorLayout.cshtml";
+    }
+    else if (role == "receptionist")
+    {
+        Layout = "~/Views/Shared/_ReceptionistLayout.cshtml";
+    }
+    else if (role == "patient")
+    {
+        Layout = "~/Views/Shared/_PatientLayout.cshtml";
+    }
+    else
+    {
+        Layout = "~/Views/Shared/_Layout.cshtml";
+    }
+}

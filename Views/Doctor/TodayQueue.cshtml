@@ -1,0 +1,67 @@
+@model List<Clinic_Queue_Management.Models.DoctorQueueViewModel>
+@{
+    ViewData["Title"] = "Today's Queue";
+    Layout = "~/Views/Shared/_DoctorLayout.cshtml";
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="card-title">Today's Queue</h4>
+                @if (TempData["Success"] != null)
+                {
+                    <div class="alert alert-success mt-2">@TempData["Success"]</div>
+                }
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-bordered table-head-bg-primary table-bordered-bd-primary mt-4">
+                        <thead>
+                            <tr>
+                                <th>Token</th>
+                                <th>Patient Name</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if (Model != null && Model.Any())
+                            {
+                                foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td>@item.TokenNumber</td>
+                                        <td>@item.PatientName</td>
+                                        <td>
+                                            <span class="badge @(item.Status == "waiting" ? "badge-warning" : item.Status == "in_progress" ? "badge-primary" : item.Status == "done" ? "badge-success" : "badge-danger")">
+                                                @item.Status
+                                            </span>
+                                        </td>
+                                        <td>
+                                            @if (item.Status == "in_progress" || item.Status == "done" || item.Status == "in-progress")
+                                            {
+                                                <a asp-action="AddPrescription" asp-route-id="@item.AppointmentId" class="btn btn-sm btn-info">Add Prescription</a>
+                                                <a asp-action="AddReport" asp-route-id="@item.AppointmentId" class="btn btn-sm btn-secondary ms-2">Add Report</a>
+                                            }
+                                            else
+                                            {
+                                                <span class="text-muted">Wait for Receptionist (Current Status: @item.Status)</span>
+                                            }
+                                        </td>
+                                    </tr>
+                                }
+                            }
+                            else
+                            {
+                                <tr>
+                                    <td colspan="4" class="text-center">No patients in the queue today.</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

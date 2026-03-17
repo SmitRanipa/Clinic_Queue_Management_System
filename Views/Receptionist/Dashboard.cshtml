@@ -1,0 +1,18 @@
+@{
+    ViewData["Title"] = "Receptionist Dashboard";
+    Layout = "~/Views/Shared/_ReceptionistLayout.cshtml";
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="card-title">Welcome Receptionist</h4>
+            </div>
+            <div class="card-body">
+                <p>Welcome to the Receptionist Dashboard. Here you can manage the daily queue and update patient queue statuses.</p>
+                <a asp-action="DailyQueue" class="btn btn-primary">Manage Daily Queue</a>
+            </div>
+        </div>
+    </div>
+</div>

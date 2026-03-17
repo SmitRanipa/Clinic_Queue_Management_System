@@ -1,0 +1,25 @@
+﻿@model Clinic_Queue_Management.Models.BookAppointmentViewModel
+@{
+    ViewData["Title"] = "Book Appointment";
+}
+
+<div class="col-md-6 offset-md-3">
+    <h3>Book Appointment</h3>
+
+    @if (ViewBag.Error != null)
+    {
+        <div class="alert alert-danger">@ViewBag.Error</div>
+    }
+
+    <form asp-action="BookAppointment" method="post">
+        <div class="mb-3">
+            <label>Date</label>
+            <input asp-for="AppointmentDate" class="form-control" type="date" min="@DateTime.Now.ToString("yyyy-MM-dd")" />
+        </div>
+        <div class="mb-3">
+            <label>Time Slot</label>
+            <input asp-for="TimeSlot" class="form-control" placeholder="10:00-10:15" />
+        </div>
+        <button type="submit" class="btn btn-success">Book</button>
+    </form>
+</div>

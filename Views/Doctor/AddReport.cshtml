@@ -1,0 +1,43 @@
+@model Clinic_Queue_Management.Models.AddReportViewModel
+@{
+    ViewData["Title"] = "Add Report";
+    Layout = "~/Views/Shared/_DoctorLayout.cshtml";
+}
+
+<div class="row">
+    <div class="col-md-8 mx-auto">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="card-title">Add Report</h4>
+            </div>
+            <div class="card-body">
+                @if (ViewBag.Error != null)
+                {
+                    <div class="alert alert-danger">@ViewBag.Error</div>
+                }
+
+                <form asp-action="AddReport" method="post">
+                    <input type="hidden" asp-for="AppointmentId" />
+
+                    <div class="form-group mb-3">
+                        <label asp-for="Diagnosis">Diagnosis</label>
+                        <input asp-for="Diagnosis" class="form-control" placeholder="Enter diagnosis..." required />
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <label asp-for="TestRecommended">Recommended Tests</label>
+                        <input asp-for="TestRecommended" class="form-control" placeholder="e.g. Blood Test, X-Ray..." />
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <label asp-for="Remarks">Remarks / Advice</label>
+                        <textarea asp-for="Remarks" class="form-control" rows="3"></textarea>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary w-100">Submit Report</button>
+                    <a asp-action="TodayQueue" class="btn btn-secondary w-100 mt-2">Back to Queue</a>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,58 @@
+@{
+    ViewData["Title"] = "My Prescriptions";
+    Layout = "~/Views/Shared/_PatientLayout.cshtml";
+}
+@model List<Clinic_Queue_Management.Models.PrescriptionViewModel>
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="card-title">My Prescriptions</h4>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-bordered table-head-bg-primary table-bordered-bd-primary mt-4">
+                        <thead>
+                            <tr>
+                                <th>Doctor</th>
+                                <th>Notes</th>
+                                <th>Medicines</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if (Model != null && Model.Count > 0)
+                            {
+                                foreach (var pres in Model)
+                                {
+                                    <tr>
+                                        <td>
+                                            @if (pres.Doctor is string docStr) { @docStr }
+                                            else if (pres.Doctor != null && pres.Doctor is Newtonsoft.Json.Linq.JObject docObj) { @docObj["name"] }
+                                        </td>
+                                        <td>@pres.Notes</td>
+                                        <td>
+                                            @if (pres.Medicines != null)
+                                            {
+                                                <ul>
+                                                @foreach (var med in pres.Medicines)
+                                                {
+                                                    <li><strong>@med.Name</strong> - @med.Dosage (@med.Duration)</li>
+                                                }
+                                                </ul>
+                                            }
+                                        </td>
+                                    </tr>
+                                }
+                            }
+                            else
+                            {
+                                <tr><td colspan="3" class="text-center">No prescriptions found.</td></tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

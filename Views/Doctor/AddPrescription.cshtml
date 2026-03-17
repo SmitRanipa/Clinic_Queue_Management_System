@@ -1,0 +1,62 @@
+@model Clinic_Queue_Management.Models.AddPrescriptionViewModel
+@{
+    ViewData["Title"] = "Add Prescription";
+    Layout = "~/Views/Shared/_DoctorLayout.cshtml";
+}
+
+<div class="row">
+    <div class="col-md-8 mx-auto">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="card-title">Add Prescription</h4>
+            </div>
+            <div class="card-body">
+                @if (ViewBag.Error != null)
+                {
+                    <div class="alert alert-danger">@ViewBag.Error</div>
+                }
+
+                <form asp-action="AddPrescription" method="post">
+                    <input type="hidden" asp-for="AppointmentId" />
+
+                    <div class="form-group mb-3">
+                        <label>Medicines</label>
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>Medicine Name</th>
+                                    <th>Dosage</th>
+                                    <th>Duration</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @for (int i = 0; i < Model.Medicines.Count; i++)
+                                {
+                                    <tr>
+                                        <td>
+                                            <input asp-for="Medicines[i].Name" class="form-control" placeholder="Name" />
+                                        </td>
+                                        <td>
+                                            <input asp-for="Medicines[i].Dosage" class="form-control" placeholder="Dosage (e.g. 500mg)" />
+                                        </td>
+                                        <td>
+                                            <input asp-for="Medicines[i].Duration" class="form-control" placeholder="Duration (e.g. 5 days)" />
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <label asp-for="Notes">Notes / Additional Instructions</label>
+                        <textarea asp-for="Notes" class="form-control" rows="3"></textarea>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary w-100">Submit Prescription</button>
+                    <a asp-action="TodayQueue" class="btn btn-secondary w-100 mt-2">Back to Queue</a>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

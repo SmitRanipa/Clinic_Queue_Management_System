@@ -1,0 +1,14 @@
+# Visual Studio temp files
+.vs/
+*.user
+*.suo
+*.tmp
+*.log
+
+# Build output folders
+bin/
+obj/
+
+# OS generated files
+Thumbs.db
+.DS_Store

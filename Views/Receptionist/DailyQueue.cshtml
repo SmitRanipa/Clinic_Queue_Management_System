@@ -1,0 +1,94 @@
+@model List<Clinic_Queue_Management.Models.ReceptionistQueueViewModel>
+@{
+    ViewData["Title"] = "Daily Queue";
+    Layout = "~/Views/Shared/_ReceptionistLayout.cshtml";
+    var selectedDate = ViewBag.SelectedDate as string;
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <h4 class="card-title">Daily Queue</h4>
+                <form method="get" asp-action="DailyQueue" class="d-flex align-items-center">
+                    <label class="me-2 fw-bold">Select Date:</label>
+                    <input type="date" name="date" class="form-control me-2" value="@selectedDate" />
+                    <button type="submit" class="btn btn-primary btn-sm">Filter</button>
+                </form>
+            </div>
+            <div class="card-body">
+                @if (TempData["Success"] != null)
+                {
+                    <div class="alert alert-success mt-2">@TempData["Success"]</div>
+                }
+                @if (TempData["Error"] != null)
+                {
+                    <div class="alert alert-danger mt-2">@TempData["Error"]</div>
+                }
+
+                <div class="table-responsive">
+                    <table class="table table-bordered table-head-bg-primary table-bordered-bd-primary mt-4">
+                        <thead>
+                            <tr>
+                                <th>Token</th>
+                                <th>Patient Name</th>
+                                <th>Phone</th>
+                                <th>Status</th>
+                                <th>Update Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if (Model != null && Model.Any())
+                            {
+                                foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td>@item.TokenNumber</td>
+                                        <td>@item.Appointment?.Patient?.Name</td>
+                                        <td>@item.Appointment?.Patient?.Phone</td>
+                                        <td>
+                                            <span class="badge @(item.Status == "waiting" ? "badge-warning" : item.Status == "in-progress" ? "badge-primary" : item.Status == "done" ? "badge-success" : "badge-danger")">
+                                                @item.Status
+                                            </span>
+                                        </td>
+                                        <td>
+                                            @if (item.Status != "done" && item.Status != "skipped")
+                                            {
+                                                <form method="post" asp-action="UpdateStatus" class="d-inline">
+                                                    <input type="hidden" name="id" value="@item.Id" />
+                                                    <input type="hidden" name="date" value="@selectedDate" />
+                                                    <select name="status" class="form-select form-select-sm d-inline-block w-auto">
+                                                        @if (item.Status == "waiting")
+                                                        {
+                                                            <option value="in-progress">In-Progress</option>
+                                                            <option value="skipped">Skipped</option>
+                                                        }
+                                                        else if (item.Status == "in-progress" || item.Status == "in_progress")
+                                                        {
+                                                            <option value="done">Done</option>
+                                                        }
+                                                    </select>
+                                                    <button type="submit" class="btn btn-sm btn-info ms-1">Update</button>
+                                                </form>
+                                            }
+                                            else
+                                            {
+                                                <span class="text-muted">Completed</span>
+                                            }
+                                        </td>
+                                    </tr>
+                                }
+                            }
+                            else
+                            {
+                                <tr>
+                                    <td colspan="5" class="text-center">No queue found for this date.</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

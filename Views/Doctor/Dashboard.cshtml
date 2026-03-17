@@ -1,0 +1,18 @@
+@{
+    ViewData["Title"] = "Doctor Dashboard";
+    Layout = "~/Views/Shared/_DoctorLayout.cshtml";
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="card-title">Welcome Doctor</h4>
+            </div>
+            <div class="card-body">
+                <p>Welcome to the Doctor Dashboard. Here you can view today's queue, and add prescriptions and reports for your patients.</p>
+                <a asp-action="TodayQueue" class="btn btn-primary">View Today's Queue</a>
+            </div>
+        </div>
+    </div>
+</div>

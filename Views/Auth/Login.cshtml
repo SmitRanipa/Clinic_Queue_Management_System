@@ -1,0 +1,52 @@
+@{
+    Layout = null;
+}
+@model LoginViewModel
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login - Clinic Queue Management</title>
+    <link rel="stylesheet" href="~/assets/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/assets/css/kaiadmin.min.css" />
+</head>
+<body class="bg-light">
+
+    <div class="container d-flex justify-content-center align-items-center vh-100">
+        <div class="card shadow-sm p-4" style="width: 100%; max-width: 400px; border-radius: 10px;">
+            <div class="card-body">
+                <div class="text-center mb-4">
+                    <h3 class="fw-bold">Welcome Back</h3>
+                    <p class="text-muted">Sign in to your account</p>
+                </div>
+
+                <form method="post">
+                    @if (ViewBag.Error != null)
+                    {
+                        <div class="alert alert-danger text-center p-2 mb-3">@ViewBag.Error</div>
+                    }
+
+                    <div class="form-group mb-3">
+                        <label class="form-label">Email address</label>
+                        <input type="email" name="Email" class="form-control" placeholder="Enter email" required />
+                    </div>
+
+                    <div class="form-group mb-4">
+                        <label class="form-label">Password</label>
+                        <input type="password" name="Password" class="form-control" placeholder="Password" required />
+                    </div>
+
+                    <button type="submit" class="btn btn-primary w-100 fw-bold">Login</button>
+                    
+                    <div class="text-center mt-3">
+                        <small class="text-muted">Clinic Queue Management System</small>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

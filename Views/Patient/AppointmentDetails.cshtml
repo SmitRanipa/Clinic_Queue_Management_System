@@ -1,0 +1,32 @@
+﻿@model Clinic_Queue_Management.Models.AppointmentDetailsViewModel
+@{
+    ViewData["Title"] = "Appointment Details";
+}
+
+<h3>Appointment Details</h3>
+
+<p><b>Date:</b> @Model.AppointmentDate</p>
+<p><b>Time Slot:</b> @Model.TimeSlot</p>
+<p><b>Status:</b> @Model.Status</p>
+
+@if (Model.Prescription != null)
+{
+    <h4>Prescription</h4>
+    <ul>
+        @foreach (var med in Model.Prescription.Medicines)
+        {
+            <li>@med.Name - @med.Dosage - @med.Duration</li>
+        }
+    </ul>
+    <p><b>Notes:</b> @Model.Prescription.Notes</p>
+    <p><b>Doctor:</b> @Model.Prescription.Doctor</p>
+}
+
+@if (Model.Report != null)
+{
+    <h4>Report</h4>
+    <p><b>Diagnosis:</b> @Model.Report.Diagnosis</p>
+    <p><b>Tests:</b> @Model.Report.TestRecommended</p>
+    <p><b>Remarks:</b> @Model.Report.Remarks</p>
+    <p><b>Doctor:</b> @Model.Report.Doctor</p>
+}

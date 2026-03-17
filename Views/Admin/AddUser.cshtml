@@ -1,0 +1,43 @@
+﻿@model CreateUserViewModel
+
+<div class="container mt-4">
+    <h3>Add New User</h3>
+
+    <form method="post">
+
+        <div class="mb-3">
+            <label>Name</label>
+            <input asp-for="Name" class="form-control" />
+        </div>
+
+        <div class="mb-3">
+            <label>Email</label>
+            <input asp-for="Email" class="form-control" />
+        </div>
+
+        <div class="mb-3">
+            <label>Password</label>
+            <input asp-for="Password" type="password" class="form-control" />
+        </div>
+
+        <div class="mb-3">
+            <label>Role</label>
+            <select asp-for="Role" class="form-control">
+                <option value="">Select Role</option>
+                <option value="doctor">Doctor</option>
+                <option value="receptionist">Receptionist</option>
+                <option value="patient">Patient</option>
+            </select>
+        </div>
+
+        <div class="mb-3">
+            <label>Phone</label>
+            <input asp-for="Phone" class="form-control" />
+        </div>
+
+        <button type="submit" class="btn btn-primary">Create User</button>
+
+        <p class="text-danger mt-2">@ViewBag.Error</p>
+
+    </form>
+</div>

@@ -1,0 +1,10 @@
+﻿@{
+    ViewData["Title"] = "Dashboard";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome, @User.Identity.Name</h1>
+    <p>Book your appointment or view upcoming appointments below.</p>
+    <a asp-action="BookAppointment" class="btn btn-primary">Book Appointment</a>
+    <a asp-action="MyAppointments" class="btn btn-info">My Appointments</a>
+</div>

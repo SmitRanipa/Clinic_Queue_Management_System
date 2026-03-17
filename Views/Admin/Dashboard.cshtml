@@ -1,0 +1,36 @@
+﻿<div class="container mt-4">
+    <h2>Clinic Dashboard</h2>
+
+    @if (ViewBag.Clinic != null)
+    {
+        <div class="row mt-4">
+            <div class="col-md-3">
+                <div class="card p-3 text-center">
+                    <h5>Clinic Name</h5>
+                    <p>@ViewBag.Clinic.clinicName</p>
+                </div>
+            </div>
+
+            <div class="col-md-3">
+                <div class="card p-3 text-center">
+                    <h5>Users</h5>
+                    <p>@ViewBag.Clinic.userCount</p>
+                </div>
+            </div>
+
+            <div class="col-md-3">
+                <div class="card p-3 text-center">
+                    <h5>Appointments</h5>
+                    <p>@ViewBag.Clinic.appointmentCount</p>
+                </div>
+            </div>
+
+            <div class="col-md-3">
+                <div class="card p-3 text-center">
+                    <h5>Queue</h5>
+                    <p>@ViewBag.Clinic.queueCount</p>
+                </div>
+            </div>
+        </div>
+    }
+</div>
